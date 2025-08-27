@@ -21,10 +21,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v4
       with:
         role-to-assume: ${{ secrets.AWS_OIDC_ROLE }}
-        aws-region: us-west-2
+        aws-region: us-east-q
 
-    - name: List EC2 Instances
-      run: |
-        aws ec2 describe-instances \
-          --query "Reservations[*].Instances[*].InstanceId" \
-          --output table
+    - name: Verify AWS Identity
+      run: aws sts get-caller-identity
